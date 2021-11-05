@@ -1,2 +1,2 @@
 # Thor
-Discord bot develop in nodejs with lib discord.js 🤖
+Discord bot develop with Node.js and the Discord.js library 🤖
