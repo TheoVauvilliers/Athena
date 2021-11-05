@@ -1,25 +1,22 @@
-import { Client, Intents } from 'discord.js'
-import { token, prefix } from './config.js'
+const { Client, Intents } = require('discord.js');
+const { token } = require('./config.js');
 
-const client = new Client({
-    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
-})
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 client.once('ready', () => {
-    console.log('I\'m online dude !')
-})
+	console.log('Ready!');
+});
 
-client.on('messageCreate', (message) => {
-    if (!message.content.startsWith(prefix)) return;
-    if (message.author.bot) return;
-    
-    if (message.content.includes('ping')) {
-        message.channel.send('pong')
-    }
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
 
-    else if (message.content.includes('Hey')) {
-        message.channel.send('What\'s up dude ?')
-    }
-})
+	const { commandName } = interaction;
 
-client.login(token)
+	if (commandName === 'ping') {
+		await interaction.reply('Pong!');
+	} else if (commandName === 'beep') {
+		await interaction.reply('Boop!');
+	}
+});
+
+client.login(token);
