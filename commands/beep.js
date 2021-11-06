@@ -9,7 +9,6 @@ module.exports = {
 				.setDescription('Your argument')
 				.setRequired(false)),
 	async execute(interaction) {
-		console.log(interaction.options)
 		await interaction.reply({ content: `Boop ${interaction.options.getString('arg')} !`, ephemeral: true })
 	},
 }
