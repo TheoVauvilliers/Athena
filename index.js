@@ -1,14 +1,15 @@
 const fs = require('fs')
 const { Client, Collection, Intents } = require('discord.js')
 const { token } = require('./config.js')
+const { loadCommands } = require('./lib/helpers.js')
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] })
 
 // To get the names of commands in the commands directory using file names
 client.commands = new Collection()
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`)
+const commandPath = loadCommands(fs)
+for (const path of commandPath) {
+	const command = require(path)
 	client.commands.set(command.data.name, command)
 }
 
