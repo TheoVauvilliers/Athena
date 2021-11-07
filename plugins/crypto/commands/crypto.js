@@ -8,7 +8,7 @@ module.exports = {
 		.setDescription('Use this command to get information about a specific cryptocurrency.')
 		.addStringOption(option =>
 			option.setName('id')
-				.setDescription('Insert id of crypto, you can find it with /crypto-list command')
+				.setDescription('Insert id of crypto, you can find it with /crypto-list command.')
 				.setRequired(true)),
 	async execute(interaction) {				
 		await interaction.reply({ embeds: [

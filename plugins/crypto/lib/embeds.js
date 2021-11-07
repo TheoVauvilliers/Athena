@@ -12,5 +12,5 @@ exports.createCryptoEmbed = (data, interaction) => {
             { name: 'Rate last 24hr', value: `${parseFloat(data.changePercent24Hr).toFixed(4)}%`, inline: true },
         )
         .setTimestamp()
-        .setFooter('Made by Athéna x CoinCap API');
+        .setFooter('By Athena x CoinCap API');
 }

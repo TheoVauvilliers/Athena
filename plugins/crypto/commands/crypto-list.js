@@ -4,12 +4,12 @@ const { getAvailableCrypto } = require('../lib/api.js')
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('crypto-list')
-		.setDescription('Displays the list of available cryptocurrencies.')
+		.setDescription('Displays the list of available crypto-currencies sorted by rank.')
 		.addStringOption(option =>
-			option.setName('number')
-				.setDescription('Number of cryptocurrency to display, 20 by default, 200 max.')
+			option.setName('top')
+				.setDescription('Top x cryptocurrency to display, top 20 by default, top 200 max.')
 				.setRequired(false)),
 	async execute(interaction) {				
-		await interaction.reply({ content: await getAvailableCrypto(interaction.options.getString('number'))})
+		await interaction.reply({ content: await getAvailableCrypto(interaction.options.getString('top'))})
 	},
 }
