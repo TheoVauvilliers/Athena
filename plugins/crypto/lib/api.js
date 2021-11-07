@@ -29,3 +29,25 @@ exports.getAvailableCrypto = async(limit = defaultAvailableCrypto) => {
 
     return cryptoCurrNames
 }
+
+exports.getInformationCrypto = async(id) => {
+    const response = await(fetch(baseApi + `assets/${id}`, {
+        headers: {
+            'Authorization': 'Bearer ' + coincapApiKey
+        }
+    }))
+
+    if (response.status >= 400) {
+        return 'An error has occurred'
+    }
+
+    const data = await response.json()
+
+    console.log(data)
+    let cryptoInfo = ''
+    for (property in data.data) {
+        cryptoInfo += `${property}: ${data.data[property]}\n`
+    }
+
+    return cryptoInfo
+}
