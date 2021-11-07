@@ -22,5 +22,5 @@ exports.getAvailableCrypto = async() => {
         name.push(crypto.id)
     });
 
-    return name
+    return name.join('\n')
 }
