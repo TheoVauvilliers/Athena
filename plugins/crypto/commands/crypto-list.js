@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders')
-const { getAvailableCrypto } = require('../lib/api.helpers')
+const { getAvailableCrypto } = require('../lib/api.js')
 
 module.exports = {
 	data: new SlashCommandBuilder()

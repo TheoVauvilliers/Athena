@@ -23,8 +23,8 @@ exports.getAvailableCrypto = async(limit = defaultAvailableCrypto) => {
     const data = await response.json()
     let cryptoCurrNames = ''
     // Loop on the json to get only the names of the crypto-currencies
-    data.data.forEach(crypto => {
-        cryptoCurrNames += `\n${crypto.name}`
+    data.data.forEach((crypto, rank) => {
+        cryptoCurrNames += `\n${rank+1}. ${crypto.name} (id : ${crypto.id})`
     });
 
     return cryptoCurrNames
