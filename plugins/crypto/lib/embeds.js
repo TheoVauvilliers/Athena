@@ -1,9 +1,9 @@
 const { MessageEmbed } = require('discord.js');
 
-exports.createCryptoEmbed = (data, interaction) => {
+exports.createCryptoEmbed = (data, avatar) => {
     return new MessageEmbed()
         .setColor('#c6b8b7')
-        .setThumbnail(interaction.user.displayAvatarURL({ format: 'jpg' }))
+        .setThumbnail(avatar)
         .setTitle(`${data.name} information`)
         .setDescription(`${data.symbol}`)
         .addFields(

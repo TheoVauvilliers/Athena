@@ -14,7 +14,7 @@ module.exports = {
 		await interaction.reply({ embeds: [
 			createCryptoEmbed(
 				await getInformationCrypto(interaction.options.getString('id')),
-				interaction
+				interaction.user.displayAvatarURL({ format: 'jpg' })
 			)
 		]})
 	},
