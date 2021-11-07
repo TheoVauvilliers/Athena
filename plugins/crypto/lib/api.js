@@ -43,11 +43,5 @@ exports.getInformationCrypto = async(id) => {
 
     const data = await response.json()
 
-    console.log(data)
-    let cryptoInfo = ''
-    for (property in data.data) {
-        cryptoInfo += `${property}: ${data.data[property]}\n`
-    }
-
-    return cryptoInfo
+    return data.data
 }

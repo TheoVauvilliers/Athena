@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders')
 const { getInformationCrypto } = require('../lib/api.js')
+const { createCryptoEmbed } = require('../lib/embeds.js')
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -10,8 +11,11 @@ module.exports = {
 				.setDescription('Insert id of crypto, you can find it with /crypto-list command')
 				.setRequired(true)),
 	async execute(interaction) {				
-		await interaction.reply({ content: async () => {
-			return await getInformationCrypto(interaction.options.getString('id'))
-		} })
+		await interaction.reply({ embeds: [
+			createCryptoEmbed(
+				await getInformationCrypto(interaction.options.getString('id')),
+				interaction
+			)
+		]})
 	},
 }
