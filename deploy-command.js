@@ -15,6 +15,8 @@ for (const path of commandPath) {
 
 const rest = new REST({ version: '9' }).setToken(token)
 
-rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
-    .then(() => console.log('Successfully registered application commands.'))
+guildId.forEach(id => {
+    rest.put(Routes.applicationGuildCommands(clientId, id), { body: commands })
+    .then(() => console.log(`Successfully registered application commands on ${id}.`))
     .catch(console.error)
+})
