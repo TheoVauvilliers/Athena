@@ -23,7 +23,7 @@ exports.getAvailableCrypto = async() => {
     let cryptoCurrNames = ''
     // Loop on the json to get only the names of the crypto-currencies
     data.data.forEach(crypto => {
-        cryptoCurrNames += `\n${crypto.id}`
+        cryptoCurrNames += `\n${crypto.name}`
     });
 
     return cryptoCurrNames
