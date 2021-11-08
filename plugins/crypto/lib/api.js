@@ -10,32 +10,31 @@ exports.getAvailableCrypto = async(limit = defaultAvailableCrypto) => {
         limit = defaultAvailableCrypto
     }
 
-    const response = await(fetch(baseApi + `assets?limit=${limit}`, {
+    const response = await fetch(baseApi + `assets?limit=${limit}`, {
         headers: {
             'Authorization': 'Bearer ' + coincapApiKey
         }
-    }))
+    })
 
     if (response.status >= 400) {
-        return 'An error has occurred'
+        return 'An error has occurred\n'
     }
 
     const data = await response.json()
-    let cryptoCurrNames = ''
     // Loop on the json to get only the names of the crypto-currencies
-    data.data.forEach((crypto, rank) => {
-        cryptoCurrNames += `\n${rank+1}. ${crypto.name} (id : ${crypto.id})`
-    });
+    const cryptoCurrNames = data.data.reduce((acc, crypto, index) => {
+        return acc += `${index+1}. ${crypto.name} (id : ${crypto.id})\n`
+    }, '')
 
     return cryptoCurrNames
 }
 
 exports.getInformationCrypto = async(id) => {
-    const response = await(fetch(baseApi + `assets/${id}`, {
+    const response = await fetch(baseApi + `assets/${id}`, {
         headers: {
             'Authorization': 'Bearer ' + coincapApiKey
         }
-    }))
+    })
 
     if (response.status >= 400) {
         return 'An error has occurred'
