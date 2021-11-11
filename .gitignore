@@ -1,6 +1,4 @@
 node_modules
-config.js
-db.json
 .env
 
 .vscode
