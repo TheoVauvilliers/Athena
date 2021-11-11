@@ -4,6 +4,7 @@ const { REST } = require('@discordjs/rest')
 const { Routes } = require('discord-api-types/v9')
 const { guildId } = require('./config.js')
 const { loadCommands } = require('./lib/helpers.js')
+require('dotenv').config()
 
 // To get the names of commands in the commands directory using file names
 const commands = []
