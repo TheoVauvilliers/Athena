@@ -2,7 +2,7 @@ const fs = require('fs')
 const { SlashCommandBuilder } = require('@discordjs/builders')
 const { REST } = require('@discordjs/rest')
 const { Routes } = require('discord-api-types/v9')
-const { clientId, guildId, token } = require('./config.js')
+const { guildId } = require('./config.js')
 const { loadCommands } = require('./lib/helpers.js')
 
 // To get the names of commands in the commands directory using file names
@@ -13,10 +13,10 @@ for (const path of commandPath) {
 	commands.push(command.data.toJSON())
 }
 
-const rest = new REST({ version: '9' }).setToken(token)
+const rest = new REST({ version: '9' }).setToken(process.env.ATHENA_TOKEN)
 
 guildId.forEach(id => {
-    rest.put(Routes.applicationGuildCommands(clientId, id), { body: commands })
+    rest.put(Routes.applicationGuildCommands(process.env.ATHENA_CLIENT_ID, id), { body: commands })
     .then(() => console.log(`Successfully registered application commands on ${id}.`))
     .catch(console.error)
 })

@@ -1,5 +1,5 @@
+require('dotenv').config()
 const { Client, Collection, Intents } = require('discord.js')
-const { token } = require('./config.js')
 const { loadCommands } = require('./lib/helpers.js')
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] })
@@ -30,4 +30,4 @@ client.on('interactionCreate', async interaction => {
 	}
 })
 
-client.login(token)
+client.login(process.env.ATHENA_TOKEN)

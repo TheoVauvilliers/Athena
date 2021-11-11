@@ -1,5 +1,3 @@
-const { PROJECT_DIR } = require('settings')
-const { coincapApiKey } =  require(PROJECT_DIR + '/config.js')
 const { fetch } = require('cross-fetch')
 
 const baseApi = '//api.coincap.io/v2/'
@@ -12,7 +10,7 @@ exports.getAvailableCrypto = async(limit = defaultAvailableCrypto) => {
 
     const response = await fetch(baseApi + `assets?limit=${limit}`, {
         headers: {
-            'Authorization': 'Bearer ' + coincapApiKey
+            'Authorization': 'Bearer ' + process.env.COINCAP_API_KEY
         }
     })
 
@@ -32,7 +30,7 @@ exports.getAvailableCrypto = async(limit = defaultAvailableCrypto) => {
 exports.getInformationCrypto = async(id) => {
     const response = await fetch(baseApi + `assets/${id}`, {
         headers: {
-            'Authorization': 'Bearer ' + coincapApiKey
+            'Authorization': 'Bearer ' + process.env.COINCAP_API_KEY
         }
     })
 

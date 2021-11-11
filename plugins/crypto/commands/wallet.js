@@ -1,6 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders')
-const { PROJECT_DIR } = require('settings')
-const { fetch, fetchOneById } = require(PROJECT_DIR + '/lib/userRepository.js')
+const { fetch, fetchOneById } = require('../../../lib/userRepository.js')
 
 module.exports = {
 	data: new SlashCommandBuilder()
