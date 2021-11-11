@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon .",
-    "deploy": "node deploy-command.js"
+    "dev": "nodemon .",
+    "deploy": "node deploy-command.js",
+    "start": "node deploy-command.js && node ."
   },
   "author": "Moi",
   "license": "ISC",
