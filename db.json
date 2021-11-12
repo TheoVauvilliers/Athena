@@ -4,7 +4,11 @@
             "id": "246988476736602114",
             "wallet": {
                 "shiba-inu": 1000,
-                "bitcoin": 0.232
+                "bitcoin": 0.232,
+                "dogecoin": 300,
+                "ethereum": 3,
+                "solana": 0.4,
+                "terra-luna": 1.5
             }
         },
         {

@@ -2,6 +2,7 @@ const { fetch } = require('cross-fetch')
 
 const baseApi = '//api.coincap.io/v2/'
 const defaultAvailableCrypto = 20
+const errorMessage = 'An error has occurred'
 
 exports.getAvailableCrypto = async(limit = defaultAvailableCrypto) => {
     if (limit <= 0 || limit > 200 || (typeof limit === "string" && !limit.match(/^[0-9]+$/))) {
@@ -15,7 +16,7 @@ exports.getAvailableCrypto = async(limit = defaultAvailableCrypto) => {
     })
 
     if (response.status >= 400) {
-        return 'An error has occurred\n'
+        return errorMessage
     }
 
     const data = await response.json()
@@ -35,7 +36,40 @@ exports.getInformationCrypto = async(id) => {
     })
 
     if (response.status >= 400) {
-        return 'An error has occurred'
+        return errorMessage
+    }
+
+    const data = await response.json()
+
+    return data.data
+}
+
+exports.getPricesCrypto = async (currentWallet) => {
+    let data = await getAllDataCrypto()
+
+    if (data === errorMessage) {
+        return errorMessage
+    }
+
+    let unitPrices = {}
+
+    for (crypto in currentWallet) {
+        let unitPrice = data.find(el => el.id === crypto)
+        unitPrices[crypto] = parseFloat(unitPrice.priceUsd)
+    }
+
+    return unitPrices
+}
+
+getAllDataCrypto = async() => {
+    const response = await fetch(baseApi + 'assets', {
+        headers: {
+            'Authorization': 'Bearer ' + process.env.COINCAP_API_KEY
+        }
+    })
+
+    if (response.status >= 400) {
+        return errorMessage
     }
 
     const data = await response.json()
