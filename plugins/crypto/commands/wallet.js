@@ -6,7 +6,7 @@ const { getWallet } = require('../lib/db.js')
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('wallet')
-		.setDescription('WIP'),
+		.setDescription('Use this command to display your wallet as well as the value of your cryptocurrency'),
 	async execute(interaction) {
 		let currentWallet = getWallet(interaction.user.id)
 		let currentPrices = await getPricesCrypto(currentWallet)
