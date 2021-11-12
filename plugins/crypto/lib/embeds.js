@@ -23,10 +23,14 @@ exports.createWalletEmbed = (currentWallet, currentPrices, avatar, username) => 
         .setTimestamp()
         .setFooter('By Athena');
 
+    let total = 0;
     for (crypto in currentWallet) {
         let prices = parseFloat(currentWallet[crypto] * currentPrices[crypto]).toFixed(2)
+        total += currentWallet[crypto] * currentPrices[crypto]
         embed.addField(crypto.toString().toUpperCase(), `${currentWallet[crypto].toString()} for a sum of **$ ${prices.toString()}**`)
     }
+
+    embed.setDescription(`Your entire wallet is estimated at **$ ${(parseFloat(total).toFixed(2)).toString()}**`)
 
     return embed
 }
