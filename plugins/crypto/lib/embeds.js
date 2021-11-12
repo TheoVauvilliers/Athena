@@ -14,3 +14,19 @@ exports.createCryptoEmbed = (data, avatar) => {
         .setTimestamp()
         .setFooter('By Athena x CoinCap API');
 }
+
+exports.createWalletEmbed = (data, avatar, username) => {
+    let embed = new MessageEmbed()
+        .setColor('#c6b8b7')
+        .setThumbnail(avatar)
+        .setTitle(`${username}'s wallet`)
+        .setDescription(`Total price $$$$$$$`)
+        .setTimestamp()
+        .setFooter('By Athena');
+
+    for (crypto in data) {
+        embed.addField(crypto.toString(), data[crypto].toString())
+    }
+
+    return embed
+}
