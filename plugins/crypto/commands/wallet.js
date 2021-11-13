@@ -9,15 +9,18 @@ module.exports = {
 		.setDescription('Use this command to display your wallet as well as the value of your cryptocurrency'),
 	async execute(interaction) {
 		let currentWallet = getWallet(interaction.user.id)
-		let currentPrices = await getPricesCrypto(currentWallet)
+		let currentWalletWithPrices = await getPricesCrypto(currentWallet)
 
-		await interaction.reply({ embeds: [
-			createWalletEmbed(
-				currentWallet,
-				currentPrices,
-				interaction.user.displayAvatarURL({ format: 'jpg' }),
-				interaction.user.username
-			)
-		]})
+		if (currentWalletWithPrices instanceof Object) {
+			await interaction.reply({ embeds: [
+				createWalletEmbed(
+					currentWalletWithPrices,
+					interaction.user.displayAvatarURL({ format: 'jpg' }),
+					interaction.user.username
+				)
+			]})
+		} else {
+			await interaction.reply({ content: `${interaction.user.username}, your wallet is empty` })
+		}
 	},
 }

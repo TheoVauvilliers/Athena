@@ -15,22 +15,29 @@ exports.createCryptoEmbed = (data, avatar) => {
         .setFooter('By Athena x CoinCap API');
 }
 
-exports.createWalletEmbed = (currentWallet, currentPrices, avatar, username) => {
+exports.createWalletEmbed = (currentWallet, avatar, username) => {
+    const total = currentWallet.reduce((acc, crypto) => {
+        return acc += parseFloat((crypto.amount * crypto.unitPrice).toFixed(2))
+    }, 0)
+    
+    const fields = currentWallet.reduce((acc, crypto) => {
+        acc.push({
+            'name': crypto.id.toUpperCase(),
+            'value': `${crypto.amount.toString()} for a sum if **$ ${(crypto.amount * crypto.unitPrice).toFixed(2)}**`,
+            'inline': false
+        })
+
+        return acc
+    }, [])
+
     let embed = new MessageEmbed()
         .setColor('#c6b8b7')
         .setThumbnail(avatar)
         .setTitle(`${username}'s wallet`.toUpperCase())
+        .setDescription(`Your entire wallet is estimated at **$ ${total.toString()}**`)
+        .addFields(fields)
         .setTimestamp()
         .setFooter('By Athena');
-
-    let total = 0;
-    for (crypto in currentWallet) {
-        let prices = parseFloat(currentWallet[crypto] * currentPrices[crypto]).toFixed(2)
-        total += currentWallet[crypto] * currentPrices[crypto]
-        embed.addField(crypto.toString().toUpperCase(), `${currentWallet[crypto].toString()} for a sum of **$ ${prices.toString()}**`)
-    }
-
-    embed.setDescription(`Your entire wallet is estimated at **$ ${(parseFloat(total).toFixed(2)).toString()}**`)
 
     return embed
 }

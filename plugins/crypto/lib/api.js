@@ -51,14 +51,18 @@ exports.getPricesCrypto = async (currentWallet) => {
         return errorMessage
     }
 
-    let unitPrices = {}
+    let currentWalletWithPrices = []
 
     for (crypto in currentWallet) {
-        let unitPrice = data.find(el => el.id === crypto)
-        unitPrices[crypto] = parseFloat(unitPrice.priceUsd)
+        const unitPrice = data.find(el => el.id === crypto)
+        currentWalletWithPrices.push({
+            'id': crypto,
+            'amount': currentWallet[crypto],
+            'unitPrice': parseFloat(unitPrice.priceUsd)
+        })
     }
 
-    return unitPrices
+    return currentWalletWithPrices
 }
 
 getAllDataCrypto = async() => {
