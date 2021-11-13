@@ -17,7 +17,7 @@ exports.createCryptoEmbed = (data, avatar) => {
 
 exports.createWalletEmbed = (currentWallet, avatar, username) => {
     const total = currentWallet.reduce((acc, crypto) => {
-        return acc += parseFloat((crypto.amount * crypto.unitPrice).toFixed(2))
+        return acc += crypto.amount * crypto.unitPrice
     }, 0)
     
     const fields = currentWallet.reduce((acc, crypto) => {
@@ -34,7 +34,7 @@ exports.createWalletEmbed = (currentWallet, avatar, username) => {
         .setColor('#c6b8b7')
         .setThumbnail(avatar)
         .setTitle(`${username}'s wallet`.toUpperCase())
-        .setDescription(`Your entire wallet is estimated at **$ ${total.toString()}**`)
+        .setDescription(`Your entire wallet is estimated at **$ ${(parseFloat(total).toFixed(2).toString())}**`)
         .addFields(fields)
         .setTimestamp()
         .setFooter('By Athena');
