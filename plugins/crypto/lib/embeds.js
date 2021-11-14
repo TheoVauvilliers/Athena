@@ -23,7 +23,7 @@ exports.createWalletEmbed = (currentWallet, avatar, username) => {
     const fields = currentWallet.reduce((acc, crypto) => {
         acc.push({
             'name': crypto.id.toUpperCase(),
-            'value': `${crypto.amount.toString()} for a sum if **$ ${(crypto.amount * crypto.unitPrice).toFixed(2)}**`,
+            'value': `${crypto.amount.toString()} for a sum of **$ ${(crypto.amount * crypto.unitPrice).toFixed(2)}**`,
             'inline': false
         })
 
